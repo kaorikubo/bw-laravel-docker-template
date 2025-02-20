@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Todo;
 
-// 下記必要？消す？
 use Illuminate\Http\Request;
+
 
 class TodoController extends Controller
 {
@@ -22,4 +22,16 @@ class TodoController extends Controller
   
     return view('todo.create'); 
 }
+
+public function store(Request $request) 
+{
+    $content = $request->input('content');
+    $todo = new Todo();
+    $todo->content = $content;
+    $todo->save();
+
+    return redirect()->route('todo.index');
 }
+}
+
+
