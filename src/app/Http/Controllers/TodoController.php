@@ -14,13 +14,18 @@ use Illuminate\Http\Request;
 class TodoController extends Controller
 // web.phpで作成した処理の実行
 {
+    private $todo;
+
+    public function __construct(Todo $todo)
+    {
+        $this->todo = $todo;
+    }
+
     public function index()
     {
-        $todo = new Todo();
-        $todos = $todo->all();
+        $todos = $this->todo->all();
         // todosテーブルのレコードを全件取得
         // ORMによってSQL文を書く必要がない
-        // 
 
         // dd($todos);
         // → dd() : Laravelでのデバッグ関数
@@ -49,12 +54,11 @@ public function store(Request $request)
     // dd($inputs);
     // Requestクラスの->all()を使用して、フォームから送信された値を一括取得
 
-    $todo = new Todo();
+    $this->todo->fill($inputs);
     // todosテーブルの1レコードを表すTodoクラスをインスタンス化
-    $todo->fill($inputs);
     // ->fill()を使用してTodoインスタンスの各プロパティに一括で代入
     // ->fill() : $todo->{連想配列のkey} = {連想配列のvalue}を配列のすべての要素に行う
-    $todo->save();
+    $this->todo->save();
     // ->save()を実行してオブジェクトの状態をDBに保存するINSERT文を実行
 
     return redirect()->route('todo.index');
@@ -64,9 +68,7 @@ public function store(Request $request)
 
 public function show($id)
 {
-    $model = new Todo();
-    $todo = $model->find($id);
-
+    $todo = $this->todo->find($id);
     return view('todo.show', ['todo' => $todo]);
 }
 
