@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 // namespace : クラスや関数、定数などの名前を識別するためのグループ化
 
+use App\Http\Requests\TodoRequest;
 use App\Todo;
 // use : 他の名前空間にあるクラスを現在のファイルにインポートするためのキーワード
 // TodoModelインスタンス化においてのパス
-
-use Illuminate\Http\Request;
-// フォームから送信されたデータを取得
 
 
 class TodoController extends Controller
@@ -46,7 +44,7 @@ class TodoController extends Controller
 
 }
 
-public function store(Request $request) 
+public function store(TodoRequest $request)
 // ToDoの新規作成(POSTメソッドより)
 // $requestにRequestクラスのインスタンスを代入 = メソッドインジェクション
 {
@@ -78,7 +76,7 @@ public function edit($id)
     return view('todo.edit', ['todo' => $todo]);
 }
 
-public function update(Request $request, $id)
+public function update(TodoRequest $request, $id)
  // 第1引数: リクエスト情報の取得　第2引数: ルートパラメータの取得
 {
     $inputs = $request->all();
