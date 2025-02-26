@@ -1,10 +1,17 @@
 @extends('layouts.base')
+<!-- → 継承する親Bladeを指定 -->
 @section('content') 
+
 
         <div class="row justify-content-center">
           <div class="col-md-8">
           <p class="text-left">
           <a class="btn btn-success" href="{{ route('todo.create') }}">ToDoを追加</a>
+          <!-- 新規作成画面のルートを実行するようにhrefにURLを記述 -->
+          <!-- → TodoController.phpにControllerのメソッドを定義-->
+          <!-- リファクタリング : "{{ route('todo.create') }}" : web.phpで名前付きルートを定義 -->
+          <!-- → route() : ルート（URL）の名前を指定して、そのURLを自動的に生成する -->
+
         </p>
             <div class="card">
               <div class="card-header">
@@ -12,8 +19,12 @@
               </div>
               <div class="list-group list-group-flush">
               @foreach ($todos as $todo)
+              <!-- 画面上にデータを表示させる -->
+              <!-- foreachを使うことにより、Collectionインスタンスに格納されているTodoインスタンスを一つずつ$todoとして取り出す -->
+               <!-- $todos : Controllerにて取得したCollectionインスタンスが代入されている -->
                   <div class="d-flex align-items-center p-2">
                     <span class="col-9">{{ $todo->content }}</span>
+                    <a href="{{ route('todo.show', $todo->id) }}" class="btn btn-info ml-3">詳細</a>
                   </div>
               @endforeach
               </div>

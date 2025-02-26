@@ -1,7 +1,10 @@
+<!-- 新規作成画面のルート -->
+
 @extends('layouts.base')
+<!-- → 継承する親Bladeを指定 -->
 @section('content')
 
-        <div class="row justify-content-center">
+       <div class="row justify-content-center">
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">ToDo作成</div>

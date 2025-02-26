@@ -1,3 +1,5 @@
+<!-- 共通部分を別Bladeに分割 -->
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -27,6 +29,7 @@
     <main class="py-4">
       <div class="container">
         @yield('content')
+        <!-- → 子Bladeの@section('content') ~ @endsectionで囲われた部分を挿入-->
       </div>
     </main>
   </div>
