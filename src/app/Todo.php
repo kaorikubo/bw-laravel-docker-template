@@ -5,11 +5,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Todo extends Model
 // Modelを介することでSQL文を組み立てることなくtodosテーブルを操作できる
 // → TodoController.phpにてTodoModelを使えるようにインスタンス化
 {
+    use SoftDeletes;
+    
     protected $table = 'todos';
 
     protected $fillable = [
