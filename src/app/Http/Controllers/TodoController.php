@@ -47,6 +47,7 @@ class TodoController extends Controller
 public function store(TodoRequest $request)
 // ToDoの新規作成(POSTメソッドより)
 // $requestにRequestクラスのインスタンスを代入 = メソッドインジェクション
+// → 入力画面に入力した内容を$requestに代入&取得
 {
     $inputs = $request->all();
     // dd($inputs);
@@ -84,6 +85,15 @@ public function update(TodoRequest $request, $id)
     $todo->fill($inputs)->save();
 
     return redirect()->route('todo.show', $todo->id);
+}
+
+public function delete($id)
+{
+    // dd('削除のルート実行！');
+    $todo = $this->todo->find($id);
+    $todo->delete();
+
+    return redirect()->route('todo.index');
 }
 
 }
